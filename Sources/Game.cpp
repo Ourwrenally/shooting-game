@@ -21,10 +21,10 @@ int     score;          //!< スコア
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
-    PlayBGM("bgm_maoudamashii_8bit07.mp3");//  (G)
+    PlayBGM("bgm_maoudamashii_8bit07.mp3");//  (G) hw15a139 中西
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+    cannonPos = Vector2(-310, -150);//(A)　hw15a139 中西
+    targetRect = Rect(279, -140, 40, 40);//(A)　hw15a139　中西
     bulletPos.x = -999;
     score = 0;
 }
@@ -37,7 +37,7 @@ void Update()
         bulletPos = cannonPos + Vector2(50, 10);
     }
 
-    void PlaySE();   //(H)
+    void PlaySE();   //(H) hw15a139 中西
     
     if(Input::GetKeyDown(KeyMask::Space)) {
         PlayBGM("se_maoudamashii_explosion03.mp3");
@@ -50,15 +50,15 @@ void Update()
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
-            score += 100;         //(F)
+            score += 100;         //(F)　hw15a139中西
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
     }
     
-    cloudPos[0]+= 50.0f * Time::deltaTime*15;//雲初期位置&時間(B)
+    cloudPos[0]+= 50.0f * Time::deltaTime*15;//雲初期位置&時間(B) hw15a139中西
     
-    if (cloudPos[0] > 300) {//雲の復活するまで(B)
-        cloudPos[0] = -318;                //雲戻る位置。(B)
+    if (cloudPos[0] > 300) {//雲の復活するまで(B) hw15a139 中西
+        cloudPos[0] = -318;                //雲戻る位置。(B)　hw15a139 中西
     }
 
     // 背景の描画
@@ -81,8 +81,8 @@ void Update()
     FillRect(targetRect, Color::red);
 
     // スコアの描画
-    SetFont("nicoca_v1.ttf", 40.0f);//(E)
-    DrawText(FormatString("%05d", score), Vector2(-319, 199), Color::black);//(F)
-    DrawText(FormatString("%05d", score), Vector2(-320, 200), Color::white);//(F)
+    SetFont("nicoca_v1.ttf", 40.0f);//(E) hw15a139  中西
+    DrawText(FormatString("%05d", score), Vector2(-319, 199), Color::black);//(F)　hw15a139　中西
+    DrawText(FormatString("%05d", score), Vector2(-320, 200), Color::white);//(F) hw15a139 　中西
 }
 
