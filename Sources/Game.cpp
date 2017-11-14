@@ -11,11 +11,12 @@
 // TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(H)
 
 
-Vector2 cloudPos;       //!< 雲の位置
-Vector2 cannonPos;      //!< 砲台の位置
-Vector2 bulletPos;      //!< 弾の位置
-Rect    targetRect;     //!< ターゲットの矩形
-int     score;          //!< スコア
+Vector2 cloudPos;          //!< 雲の位置
+Vector2 cannonPos;         //!< 砲台の位置
+Vector2 bulletPos;         //!< 弾の位置
+Rect    targetRect;        //!< ターゲットの矩形
+int     score;             //!< スコア
+bool    cannonflag = true; //!< 砲台の上下判定 true:上移動 false:下移動 (実装 HW16A113 多田 亮太)
 
 
 // ゲーム開始時に呼ばれる関数です。
@@ -63,6 +64,10 @@ void Update()
     // 砲台の描画
     FillRect(Rect(cannonPos.x-10, -140, 20, 100), Color::blue);
     DrawImage("cannon.png", cannonPos);
+    if (cannonPos.y <= -140) cannonflag = true;  //砲台が地面に着いたらtrueにする　(実装 HW16A113 多田 亮太)
+    if (cannonPos.y > -70) cannonflag = false;   //砲台がうえに行ったらfalseにする　(実装 HW16A113 多田 亮太)
+    if (cannonflag == true) cannonPos.y+=1;      //cannonflagがtrueなら上に移動する　(実装 HW16A113 多田 亮太)
+    else cannonPos.y-=1;                         //cannonflagがtrueなら下に移動する　(実装 HW16A113 多田 亮太)
 
     // ターゲットの描画
     FillRect(targetRect, Color::red);
