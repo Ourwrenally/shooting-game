@@ -55,6 +55,8 @@ void Update()
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
     }
+    if (bulletPos.x > 330) bulletPos.x = -999; //(D)右端に行ったら打てるようになる　HW16A108　相馬亨哉
+
     
     cloudPos[0]+= 50.0f * Time::deltaTime*15;//雲初期位置&時間(B) hw15a139中西
     
@@ -79,8 +81,8 @@ void Update()
     DrawImage("cannon.png", cannonPos);
     if (cannonPos.y <= -140) cannonflag = true;  //砲台が地面に着いたらtrueにする　   ((C)実装 HW16A113 多田 亮太)
     if (cannonPos.y > -70) cannonflag = false;   //砲台がうえに行ったらfalseにする　  ((C)実装 HW16A113 多田 亮太)
-    if (cannonflag == true) cannonPos.y+=1;      //cannonflagがtrueなら上に移動する　((C)実装 HW16A113 多田 亮太)
-    else cannonPos.y-=1;                         //cannonflagがtrueなら下に移動する　((C)実装 HW16A113 多田 亮太)
+    if (cannonflag == true) cannonPos.y+=1;      //cannonflagがtrueなら上に移動する ((C)実装 HW16A113 多田 亮太)
+    else cannonPos.y-=1;                         //cannonflagがtrueなら下に移動する ((C)実装 HW16A113 多田 亮太)
 
     // ターゲットの描画
     FillRect(targetRect, Color::red);
